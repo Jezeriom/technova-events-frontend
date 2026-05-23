@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TechNova Academic Events Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary-container": "#002113",
+                        "tertiary": "#000000",
+                        "secondary-container": "#2170e4",
+                        "on-background": "#191c1e",
+                        "surface-bright": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "background": "#f7f9fb",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#565e74",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface-variant": "#45464d",
+                        "error": "#ba1a1a",
+                        "primary-container": "#131b2e",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#000000",
+                        "outline": "#76777d",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-primary-container": "#7c839b",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-error-container": "#93000a",
+                        "secondary": "#0058be",
+                        "on-secondary-container": "#fefcff",
+                        "on-tertiary-container": "#009668",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#bec6e0",
+                        "outline-variant": "#c6c6cd",
+                        "primary-fixed": "#dae2fd",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed": "#131b2e",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#adc6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.4rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "topbar-height": "64px",
+                        "container-padding-desktop": "32px",
+                        "base": "8px",
+                        "container-padding-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e3e5; border-radius: 10px; }
+        .card-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="docked fixed left-0 top-0 h-full w-[260px] bg-inverse-surface dark:bg-surface-container-lowest shadow-sm flex flex-col py-base z-50">
+<div class="px-6 py-4 mb-8">
+<h1 class="font-title-lg text-title-lg font-bold text-on-primary dark:text-on-surface">TechNova Academic</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-primary/60">Beta Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary bg-secondary/10 border-l-4 border-secondary-container" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors text-white/80 hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-md text-label-md">Participants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors text-white/80 hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-md text-label-md">Sessions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors text-white/80 hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors text-white/80 hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-md text-label-md">Reservations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors text-white/80 hover:text-white" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-md text-label-md">Performance</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-3 px-4 bg-secondary text-on-secondary rounded-lg font-label-md flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Session
+        </button>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-[260px] min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="docked sticky top-0 right-0 w-full z-40 bg-surface-container-lowest dark:bg-surface-dim border-b border-outline-variant shadow-sm flex justify-between items-center h-[64px] px-gutter">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-secondary/20 font-body-md text-body-md" placeholder="Search sessions, participants, or logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:bg-surface-container rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface leading-tight">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant">Academic Admin</p>
+</div>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border-2 border-secondary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRsicwY4EGhR9XqrxOR4MMl7WTNUYULjAandzbfEMWFphJ6fLWlGVfY9Ns87Z9gT1_AfoHSy9Ch87ShZeIQydTNwR4P_BH_ieIKR3l-H7VHuaCbi45aAZRR7zAt7WJGBIi2kPNnfELwDd4y_Aey4sFvRVO0a40EQG39dasfOxdWeJ8T_GCZWMPR0M2ABMCEPpizy4O9obc4X7RQB6iIr_QJbhXr1JNWHhqPtXYCpozxQPqzXkYyYxsFEj8H5DtlWn9sf04yZiWWdfl"/>
+</div>
+</div>
+</header>
+<!-- The Canvas -->
+<div class="p-container-padding-desktop space-y-gutter">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Academic Dashboard <span class="text-secondary-container text-sm font-normal px-2 py-0.5 bg-secondary/5 rounded border border-secondary/20 ml-2">Beta v0.8.2</span></h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Monitoring session capacity and participant engagement.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface-variant rounded font-label-md hover:bg-surface-variant/40 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                    Filters
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-secondary text-on-secondary rounded font-label-md hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="file_download">file_download</span>
+                    Export Log
+                </button>
+</div>
+</div>
+<!-- Bento Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Metric 1: Total Reservations -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 card-lift">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="assignment">assignment</span>
+</div>
+<span class="text-on-tertiary-container font-label-md bg-tertiary-fixed/20 px-2 py-0.5 rounded">+28%</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Total Reservations</p>
+<h3 class="font-display-lg text-headline-lg font-bold">850</h3>
+</div>
+<!-- Metric 2: Active Users -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 card-lift">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/5 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="person_search">person_search</span>
+</div>
+<span class="text-on-tertiary-container font-label-md bg-tertiary-fixed/20 px-2 py-0.5 rounded">+5%</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Active Users</p>
+<h3 class="font-display-lg text-headline-lg font-bold">45</h3>
+</div>
+<!-- Metric 3: Active Events (Formerly Revenue) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 card-lift">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-on-tertiary-fixed-variant/5 rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="clinical_notes">clinical_notes</span>
+</div>
+<span class="text-on-tertiary-container font-label-md bg-tertiary-fixed/20 px-2 py-0.5 rounded">+12</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Active Events</p>
+<h3 class="font-display-lg text-headline-lg font-bold">18</h3>
+</div>
+<!-- Metric 4: Occupancy Percentage -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/30 card-lift">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/5 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="pie_chart">pie_chart</span>
+</div>
+<span class="text-on-tertiary-container font-label-md bg-tertiary-fixed/20 px-2 py-0.5 rounded">High</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Occupancy Rate</p>
+<h3 class="font-display-lg text-headline-lg font-bold">78.4%</h3>
+</div>
+</div>
+<!-- Trello-inspired content columns -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Upcoming Sessions -->
+<div class="lg:col-span-8 space-y-gutter">
+<div class="bg-surface-container rounded-xl p-4 min-h-[600px] border border-outline-variant/20">
+<div class="flex justify-between items-center px-2 mb-4">
+<h4 class="font-title-lg text-title-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="calendar_month">calendar_month</span>
+                            Upcoming Sessions
+                        </h4>
+<button class="hover:bg-surface-variant/40 p-1 rounded transition-colors">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Session Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/50 card-lift">
+<img class="w-full h-32 object-cover rounded mb-4" data-alt="A modern, high-tech conference hall with large LED screens showing abstract geometric patterns in shades of deep blue and electric teal. Professional attendees sit in ergonomic chairs under soft, recessed atmospheric lighting. The mood is sophisticated and focused on technological innovation, echoing a premium corporate event aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4RYG2Cb541oN_lPSUr8gxZzN-qEsd9iH_UdniBS7SOJX6RzQP1LXaaRAU4dkaDlVzsd0YbXdCyzWItjKcFYLej6kkucVyLoTHFiQPcQIMkO71IgMz-3nFnA2NJuDeq9Pv3J862SccBIK6INeXiQrcK7sPKIo5Zha9o_cskL2qvN2inm-s3IhdjU4KOUk2V28MAaR6xl81FIu8CtBJ-ESDpEJst5V4FBB2YWu2VbIrStXulX_UarlloXxe9gBTL2Ci5R6MuyEXviCe"/>
+<div class="flex gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Scheduled</span>
+<span class="bg-on-tertiary-fixed-variant/10 text-on-tertiary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Seminar</span>
+</div>
+<h5 class="font-title-lg text-body-lg font-bold mb-1">AI Ethics Symposium 2024</h5>
+<div class="flex items-center gap-2 text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<p class="text-[12px]">Oct 24, 09:00 AM</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbEkyLbMrBCtCD2tD3SLnXgwluAndxcE51OGmDSEm1IIvhiAo1jPE1x4LPobL4gUKGhj-V3fKK5lJibfHjIW75ei7hqa_vn0vz4EultoZ0Eye79lZQOjE0U1gDqASIj6ZVIFAlvSWbzoAxm6Bw_juu5VG4VCAjFJw4XdGiodo1piH9V5-1h_pksZItsg_pnEoTdrYa9IG7XrAqm1hlaGkiZf9O3z7SCmZagtLUhMrKcmXv7Zu9i-aQrMcPphr0-OUdb5DxTvbF8srg"/>
+<img class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdOIeSL-8Fi5Tq_eOtL9UAXRYB77WLeYHQX-2S24W6jon_PMx6lM2SVd2cuzbgPmsyedR7Ixdu0Hw2wJVERHp1DeKgGclt7fBx_wBKasASZSKirJ07lUMkM-VGoEMwtCyUAKmHDDKrDf8jC5od1T-9x7Qr2d2SxyGjGrS0u6j5qEnVlDc4pMqEDtJrLNtVm4Wp4JFCvpOxcOLz9XrFdgk-80DnYLXiWxHXRNHovpDfA4IGb9g_8GZHpt3Gl5ncVLP9Jz1z-mPtfP6k"/>
+<div class="w-6 h-6 rounded-full bg-surface-container border-2 border-white flex items-center justify-center text-[10px]">+12</div>
+</div>
+<p class="text-[10px] text-on-surface-variant">Cap: 85%</p>
+</div>
+</div>
+<!-- Session Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/50 card-lift">
+<img class="w-full h-32 object-cover rounded mb-4" data-alt="A luxurious corporate gala dinner in a minimalist, glass-walled ballroom overlooking a city skyline at dusk. Tables are elegantly set with white linens, crystal glassware, and subtle floral centerpieces. The lighting is warm and ambient, creating an inviting, professional atmosphere with soft bokeh effects from distant city lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQeopIkQy6F_ewQi1NxD4HwrAoIocNot-r9JdpvWalPeYf7V7EMy4SArEXlD0H93rT0nnKcJv3_B1POPy9Nu416VpMFUpFes4Rlqm5uCxmd-aXROUTY_E6sDNVfItxRfjQqjkxF1l3pf2Lfzt5HefWY0fara-oQaWCCRaHbWLVof1rDZvR201vavE644V5Uc_mB68lBhf6mqLP7HMj-H8w_yeWbWyWZk9HcX5YkBYSbQ9GeXgn0S6e0cCnAoqX9IQnADEpPgf4k_s7"/>
+<div class="flex gap-2 mb-2">
+<span class="bg-tertiary-fixed/20 text-on-tertiary-container text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Active</span>
+<span class="bg-secondary/10 text-secondary text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Lab</span>
+</div>
+<h5 class="font-title-lg text-body-lg font-bold mb-1">Network Security Workshop</h5>
+<div class="flex items-center gap-2 text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<p class="text-[12px]">Nov 02, 10:30 AM</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoiicU5seY4fik-f9pf-zkAng7z15ZmSy5xrUsljYF1Zq06jdH7mngv9-SbTVbfYdb5BkeGYG18b9DjtJqowoVv1E6eL5snI8yiar01TUSPThTqJCK6Fzo_ZnZlHLwBqdGTE7Sc7KAGlXf0jsFz-j6O6etK4JUmGb-E6cQEDqiJ158o27ccTn0eueTZn-uUPiblpEJH7GwHnyeGwESjzZzWYmpiTJ0o2ZE_ItvaJIeixBY5rzwartTpw8WtN4Zr_0UW4sG-NLX3GbG"/>
+<div class="w-6 h-6 rounded-full bg-surface-container border-2 border-white flex items-center justify-center text-[10px]">+45</div>
+</div>
+<p class="text-[10px] text-on-surface-variant">Cap: 92%</p>
+</div>
+</div>
+<!-- Session Card 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border border-outline-variant/50 card-lift">
+<div class="flex gap-2 mb-2">
+<span class="bg-surface-variant text-on-surface-variant text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Draft</span>
+</div>
+<h5 class="font-title-lg text-body-lg font-bold mb-1">Quarterly Research Review</h5>
+<div class="flex items-center gap-2 text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<p class="text-[12px]">Dec 15, 07:00 PM</p>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mb-2">
+<div class="bg-secondary h-1.5 rounded-full w-[45%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant">Setup Progress: 45%</p>
+</div>
+<!-- Empty Add Card Slot -->
+<button class="border-2 border-dashed border-outline-variant rounded-lg p-4 flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-all group">
+<span class="material-symbols-outlined text-[32px] group-hover:scale-110 transition-transform" data-icon="add_circle">add_circle</span>
+<p class="font-label-md mt-2">New Session Card</p>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Recent Activity -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 shadow-sm flex flex-col h-[600px]">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary" data-icon="history">history</span>
+<h4 class="font-title-lg text-title-lg">Activity Log</h4>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-6">
+<!-- Activity Item 1 -->
+<div class="flex gap-4">
+<div class="flex-shrink-0">
+<img class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHmERWWe8fk7mhAyaSghCWs3CeqnTFRRhwRDkqtNWfEVbmDDTgtR9K0T0Q3vO-7ZOhZmVDz51aoD9qdgZHBptLU9uBPUY8mXpWAJZZKYKHaCYgMVpwZ-_avgSiR24wFWwzDmF0NvrnGkUh8kmTzWtTMUhv3wEfdQ_o4ouVV5cesCC9idD03mGaxlQwtpRNKwGbOZ16ynpm5cPJneVZirzP4rmBXaxup1gB7prBp6KMDhp78erSopSktCmjar5g8z4ZJpdHQyOpZUi"/>
+</div>
+<div>
+<p class="text-body-md text-on-surface"><strong>Juan Delgado</strong> updated the participant list for <span class="text-secondary font-medium">AI Ethics Symposium</span></p>
+<p class="text-[11px] text-on-surface-variant mt-1">12 minutes ago</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex gap-4">
+<div class="flex-shrink-0">
+<div class="w-8 h-8 rounded-full bg-on-tertiary-fixed-variant/10 flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div>
+<p class="text-body-md text-on-surface">Reservation confirmed: <strong>Student ID: #4421</strong> registered for <span class="text-secondary font-medium">Global AI Workshop</span></p>
+<p class="text-[11px] text-on-surface-variant mt-1">45 minutes ago</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex gap-4">
+<div class="flex-shrink-0">
+<img class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBziW4QA2qEzoZwQbh1lF-cLVE0rEpmXWS_x9xJFXSHwQ4s-G4u5H0d7riOOqRo9zKg-FTwQOWY_Uj4fN8Sjlt8E3dpq_mKATq7WAZuuoxdMb3t-Lu6KOJzLYM1UOpDM7POFE3M0Mh2XB0a1TzW_641ojU8q5yGRYfjGfIVowggxbSO9e5loOytz12K2ydTSWN-N7AlP4MiDHbeZKE7AmHSW64bblC5EmoUczwUWtYN7G6Uo2KpYkqyLoZsIgw6dPfCqaHYQpQ_vggX"/>
+</div>
+<div>
+<p class="text-body-md text-on-surface"><strong>Sarah Chen</strong> uploaded <span class="underline text-on-surface-variant italic">syllabus_draft_v2.pdf</span> to <strong>Research Review</strong></p>
+<p class="text-[11px] text-on-surface-variant mt-1">2 hours ago</p>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="flex gap-4">
+<div class="flex-shrink-0">
+<div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="assignment_turned_in">assignment_turned_in</span>
+</div>
+</div>
+<div>
+<p class="text-body-md text-on-surface">Milestone: <strong>Venue Approval</strong> for Network Security Lab</p>
+<p class="text-[11px] text-on-surface-variant mt-1">4 hours ago</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2 text-on-surface-variant hover:text-on-surface font-label-md transition-colors border-t border-outline-variant/30 pt-4 text-center">
+                        View Full History
+                    </button>
+</div>
+</div>
+</div>
+<!-- Bottom Academic row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter pb-12">
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-white flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+</div>
+<div>
+<h6 class="font-title-lg text-body-lg font-bold">Data Archive</h6>
+<p class="text-[12px] text-on-surface-variant">Automated daily research backups</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-white flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</div>
+<div>
+<h6 class="font-title-lg text-body-lg font-bold">Faculty Support</h6>
+<p class="text-[12px] text-on-surface-variant">Liaison response time: &lt; 2h</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-white flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+</div>
+<div>
+<h6 class="font-title-lg text-body-lg font-bold">Beta Certification</h6>
+<p class="text-[12px] text-on-surface-variant">Approved for institutional testing</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    document.querySelectorAll('nav a').forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('nav a').forEach(nav => {
+                nav.classList.remove('bg-secondary/10', 'border-l-4', 'border-secondary-container', 'text-on-primary');
+                nav.classList.add('text-on-surface-variant', 'text-white/80');
+            });
+            item.classList.add('bg-secondary/10', 'border-l-4', 'border-secondary-container', 'text-on-primary');
+            item.classList.remove('text-on-surface-variant', 'text-white/80');
+        });
+    });
+
+    const activityItems = document.querySelectorAll('.flex-1.overflow-y-auto > div');
+    activityItems.forEach(item => {
+        item.classList.add('p-2', 'rounded-lg', 'transition-all', 'hover:bg-surface-variant/20', 'cursor-pointer');
+    });
+</script>
+<script src="js/app.js"></script>
+</body></html>
