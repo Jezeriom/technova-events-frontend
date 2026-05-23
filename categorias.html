@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary-container": "#002113",
+                        "tertiary": "#000000",
+                        "secondary-container": "#2170e4",
+                        "on-background": "#191c1e",
+                        "surface-bright": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "background": "#f7f9fb",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#565e74",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface-variant": "#45464d",
+                        "error": "#ba1a1a",
+                        "primary-container": "#131b2e",
+                        "surface-container-low": "#f2f4f6",
+                        "primary": "#000000",
+                        "outline": "#76777d",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-primary-container": "#7c839b",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-error-container": "#93000a",
+                        "secondary": "#0058be",
+                        "on-secondary-container": "#fefcff",
+                        "on-tertiary-container": "#009668",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#bec6e0",
+                        "outline-variant": "#c6c6cd",
+                        "primary-fixed": "#dae2fd",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary-fixed": "#131b2e",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#adc6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "topbar-height": "64px",
+                        "container-padding-desktop": "32px",
+                        "base": "8px",
+                        "container-padding-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .card-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="bg-inverse-surface dark:bg-surface-container-lowest text-label-md font-label-md docked fixed left-0 top-0 h-full w-[260px] shadow-sm dark:border-r dark:border-outline-variant z-50">
+<div class="flex flex-col h-full py-base">
+<div class="px-6 py-8">
+<h1 class="font-title-lg text-title-lg font-bold text-on-primary dark:text-on-surface">TechNova Events</h1>
+<p class="text-on-primary-container opacity-70 text-sm">Event Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Usuarios</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span>Eventos</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary bg-secondary/10 border-l-4 border-secondary-container" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span>Categorías</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span>Reservas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Reportes</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary text-on-secondary py-3 rounded-lg font-bold Active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Event</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim docked sticky top-0 right-0 w-full z-40 border-b border-outline-variant dark:border-outline ml-[260px] w-[calc(100%-260px)]">
+<div class="flex justify-between items-center h-[64px] px-gutter">
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-1 w-96">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full" placeholder="Search categories..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-secondary text-on-secondary px-6 py-2 rounded-lg font-bold hover:shadow-lg transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Add Category</span>
+</button>
+<div class="flex items-center gap-2 ml-4">
+<button class="hover:bg-surface-container dark:hover:bg-inverse-surface rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-container dark:hover:bg-inverse-surface rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-outline-variant ml-2 border border-outline-variant">
+<img alt="User Profile Avatar" data-alt="A professional headshot of a senior corporate executive with a clean, minimalist background. The lighting is soft and directional, highlighting the reliable and professional demeanor of an event manager. The style is modern, high-resolution photography with a slight blue-tinted cool color palette consistent with professional administrative software environments." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdWljy6RqUDvJS8z0OFIia5AULziEyr1TheOqnePaPbJ989msdNjCMMe6v27levgcrA99lBYKRFPm2g0D5NOatWK9wrP9v8OYNc5PmF6tEHGTUjmuQBi5MiOF_9uXYOGsqtahM79XQXc9AZynIYyihMw3HsGK82YWDJMmRvUNKQgoULwvnJIuv2reCLyDiPJonNRbAJSXPiNRUhN38aC4Fp-64ae7WTi-z5fowMI-V0bh4j2FXj1r5628eIsh2_wKGpQaHsYl49ZC9"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-[260px] p-gutter min-h-screen">
+<header class="mb-8">
+<h2 class="font-headline-md text-headline-md text-primary mb-1">Categorías</h2>
+<p class="text-on-surface-variant font-body-md">Organize and manage event classifications for your catalog.</p>
+</header>
+<!-- Category Board (Trello-Inspired Grid) -->
+<div class="bento-grid">
+<!-- Category Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm card-lift border-l-4 border-secondary flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="bg-secondary/5 p-3 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="developer_board">developer_board</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg mb-2">Software Engineering</h3>
+<p class="text-on-surface-variant text-body-md line-clamp-2">Technical workshops, hackathons, and seminars focused on modern development practices.</p>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="event">event</span>
+<span class="text-label-md text-outline">24 Linked Events</span>
+</div>
+<button class="text-secondary hover:bg-secondary/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Category Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm card-lift border-l-4 border-tertiary-fixed-dim flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="bg-tertiary-fixed/10 p-3 rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="psychology">psychology</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg mb-2">Artificial Intelligence</h3>
+<p class="text-on-surface-variant text-body-md line-clamp-2">Exploring neural networks, machine learning models, and the future of generative AI.</p>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="event">event</span>
+<span class="text-label-md text-outline">18 Linked Events</span>
+</div>
+<button class="text-secondary hover:bg-secondary/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Category Card 3 (Inactive) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm card-lift border-l-4 border-outline flex flex-col gap-4 opacity-80">
+<div class="flex justify-between items-start">
+<div class="bg-surface-variant p-3 rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="cloud">cloud</span>
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Inactive</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg mb-2">Cloud Infrastructure</h3>
+<p class="text-on-surface-variant text-body-md line-clamp-2">Legacy cloud management events and archived serverless computing sessions.</p>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="event">event</span>
+<span class="text-label-md text-outline">0 Linked Events</span>
+</div>
+<button class="text-secondary hover:bg-secondary/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Category Card 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm card-lift border-l-4 border-secondary-container flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="bg-secondary-container/10 p-3 rounded-lg">
+<span class="material-symbols-outlined text-secondary-container" data-icon="security">security</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg mb-2">Cybersecurity</h3>
+<p class="text-on-surface-variant text-body-md line-clamp-2">White-hat hacking, network defense, and enterprise data protection protocols.</p>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="event">event</span>
+<span class="text-label-md text-outline">32 Linked Events</span>
+</div>
+<button class="text-secondary hover:bg-secondary/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Category Card 5 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm card-lift border-l-4 border-error/50 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="bg-error/5 p-3 rounded-lg">
+<span class="material-symbols-outlined text-error" data-icon="brush">brush</span>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg mb-2">UI/UX Design</h3>
+<p class="text-on-surface-variant text-body-md line-clamp-2">Visual design, user research, and prototyping for modern digital experiences.</p>
+</div>
+<div class="mt-auto flex items-center justify-between pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="event">event</span>
+<span class="text-label-md text-outline">15 Linked Events</span>
+</div>
+<button class="text-secondary hover:bg-secondary/5 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Empty State / Placeholder Card -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-8 gap-4 text-center hover:bg-surface-container-low transition-all cursor-pointer">
+<div class="h-12 w-12 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="add">add</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Create New Category</p>
+<p class="text-label-md text-on-surface-variant mt-1">Define a new segment for events</p>
+</div>
+</div>
+</div>
+<!-- Featured Section (Asymmetric / Glassmorphism) -->
+<section class="mt-12 relative overflow-hidden rounded-2xl bg-primary-container p-8 text-on-primary">
+<!-- Background Image with data-alt -->
+<div class="absolute inset-0 opacity-20">
+<img alt="Technology Background" class="w-full h-full object-cover" data-alt="A sprawling, high-tech command center with large glowing blue holographic displays of global data networks and futuristic architecture. The lighting is dark and cinematic with neon blue and cyan accents, creating a high-stakes, professional enterprise atmosphere. The visual style is sleek and sophisticated, blending sharp digital clarity with a sense of deep, organized complexity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz9mhMxzLPbVqDal4OVSXNZzHetP6Ng7qiZSpzBtSjkKRDDurWMCbmtb38ypiZd0Ll2O9AHOeuStvU85jbcWzmUtRSQg2echbMVFq2s1EkQOlR3swEjtoDyhmDtLuuH_77LLBh3AW0WiNBbVW-axm6R8ahIu841_BCWqeA1HvSXUGHvJYeEiSWEMuxN_xe5MpqXmToGAGPjEyGg08ClmfjlCun69DkA75F8B6cqzy8yIQarPB_YSbejoNYUqi_U-LD2d8re4h1q9g8"/>
+</div>
+<div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-4">Category Analytics</h2>
+<p class="text-on-primary-container mb-6 max-w-md">Understand which event categories are driving the most engagement and revenue for TechNova. Use these insights to plan your next quarter's logistics.</p>
+<div class="flex gap-4">
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-bold">View Report</button>
+<button class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-2 rounded-lg font-bold">Manage Rules</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/10">
+<p class="text-label-md uppercase opacity-60">Top Growing</p>
+<p class="text-headline-md font-bold">AI &amp; ML</p>
+<div class="mt-2 flex items-center gap-1 text-tertiary-fixed">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span class="text-label-md">+42%</span>
+</div>
+</div>
+<div class="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/10">
+<p class="text-label-md uppercase opacity-60">Total Events</p>
+<p class="text-headline-md font-bold">1,284</p>
+<div class="mt-2 flex items-center gap-1 text-on-primary-container">
+<span class="material-symbols-outlined text-sm" data-icon="update">update</span>
+<span class="text-label-md">Updated 2m ago</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.card-lift').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98) translateY(0)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-secondary-container');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-secondary-container');
+        });
+    </script>
+<script src="js/app.js"></script>
+</body></html>
